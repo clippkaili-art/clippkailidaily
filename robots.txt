@@ -1,0 +1,5 @@
+# TODO: replace https://clippkailidaily.com with your real domain once purchased
+User-agent: *
+Allow: /
+
+Sitemap: https://clippkailidaily.com/sitemap.xml
