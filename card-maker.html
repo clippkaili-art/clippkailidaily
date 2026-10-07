@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Maker — Clipp Kaili Daily</title>
+<meta name="description" content="Create your own beautiful 9:16 quote card. Pick a style, write your message, download and share.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
+<style>
+.tool-wrap{max-width:1080px;margin:0 auto;padding:10px 22px 30px}
+.tool-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:start;margin-top:26px}
+@media(max-width:860px){.tool-grid{grid-template-columns:1fr}}
+#card{width:100%;height:auto;border-radius:14px;box-shadow:0 6px 30px rgba(0,0,0,.5);background:#fff;display:block}
+.preview-note{text-align:center;color:var(--muted);font-size:14px;margin-top:8px}
+.style-gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:6px 0 18px}
+@media(max-width:560px){.style-gallery{grid-template-columns:repeat(5,1fr);gap:8px}}
+.style-btn{border:2px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;background:none;padding:0;transition:transform .12s ease}
+.style-btn:hover{transform:translateY(-2px)}
+.style-btn.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.style-sw{height:64px}
+.style-name{font-size:11px;color:var(--text);padding:5px 2px;background:#000;text-align:center;line-height:1.25;min-height:36px;display:flex;align-items:center;justify-content:center}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13.5px;font-weight:700;color:var(--gold);margin-bottom:5px;letter-spacing:.4px}
+.field input,.field textarea{width:100%;padding:10px 12px;font-size:16px;border:1.5px solid var(--line);border-radius:10px;background:#000;color:var(--text);outline:none;font-family:inherit}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{min-height:104px;resize:vertical;line-height:1.55}
+.row2{display:flex;gap:10px}.row2 .field{flex:1;min-width:0}
+.seg{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.seg button{flex:1;min-width:90px;padding:10px 8px;font-size:14px;border:1.5px solid var(--line);border-radius:10px;background:#000;color:var(--text);cursor:pointer;font-family:inherit}
+.seg button.active{border-color:var(--gold);color:var(--gold);font-weight:700;background:#14120c}
+.toggle-row{display:flex;align-items:center;gap:10px;margin:4px 0 14px;font-size:15.5px;color:var(--text)}
+.toggle-row input{width:20px;height:20px;accent-color:var(--gold)}
+#uploadLabel{display:inline-block;margin-bottom:14px;cursor:pointer}
+#bgUpload{display:none}
+.dl-btn{width:100%;font-size:19px;padding:16px}
+.hint{font-size:13.5px;color:var(--muted);text-align:center;margin-top:10px}
+.section-h{color:var(--gold);letter-spacing:2px;font-size:19px;margin:26px 0 12px;text-transform:uppercase;text-align:center}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html">Clipp&nbsp;Kaili</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="quotes.html">Quotes</a>
+      <a href="stories.html">Stories</a>
+      <a href="shop.html">Shop</a>
+      <a href="card-maker.html" aria-current="page">Card Maker</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero">
+  <h1>Card Maker</h1>
+  <p class="tagline">Create your own beautiful quote card &mdash; pick a style, write your words, download &amp; share</p>
+</section>
+
+<div class="tool-wrap">
+  <h2 class="section-h">1 &mdash; Pick a style</h2>
+  <div class="style-gallery" id="styleGallery"></div>
+
+  <div class="tool-grid">
+    <div>
+      <canvas id="card" width="1080" height="1920"></canvas>
+      <p class="preview-note">Live preview &mdash; 9:16</p>
+    </div>
+    <div>
+      <h2 class="section-h" style="margin-top:0">2 &mdash; Write your words</h2>
+      <div class="field">
+        <label>Heading</label>
+        <input id="inHeading" type="text" value="To My" maxlength="40">
+      </div>
+      <div class="row2">
+        <div class="field"><label>Title &mdash; first color</label><input id="inTitleA" type="text" value="Daughter" maxlength="24"></div>
+        <div class="field"><label>Title &mdash; second color</label><input id="inTitleB" type="text" value="&amp; Son." maxlength="24"></div>
+      </div>
+      <div class="field"><label>Title font style</label>
+        <div class="seg" id="fontSeg">
+          <button data-f="script" class="active">Script</button>
+          <button data-f="serif">Serif Bold</button>
+          <button data-f="sans">Sans Bold</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea id="inBody" maxlength="600">You are the two most beautiful blessings in my life. No matter how much you grow, you will always be my little ones. I may not be a perfect parent, but I promise to love you and protect you every single day. May you always walk through life with courage, kindness, and love.</textarea>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Closing line 1 &mdash; first color</label><input id="inCloseA" type="text" value="My daughter, my son &mdash; " maxlength="60"></div>
+        <div class="field"><label>Closing line 1 &mdash; second color</label><input id="inCloseB" type="text" value="my heart" maxlength="30"></div>
+      </div>
+      <div class="field"><label>Closing line 2</label><input id="inCloseC" type="text" value="will always belong to you." maxlength="60"></div>
+
+      <h2 class="section-h">3 &mdash; Finishing touches</h2>
+      <label class="toggle-row"><input type="checkbox" id="inWatermark" checked> Add &ldquo;Made with Clipp Kaili&rdquo; watermark</label>
+      <div class="field">
+        <label>Or use your own photo as background</label>
+        <label id="uploadLabel" class="share-btn small" for="bgUpload">Upload photo</label>
+        <input id="bgUpload" type="file" accept="image/*">
+      </div>
+      <div class="field" id="customToneField" style="display:none"><label>Text color on your photo</label>
+        <div class="seg" id="toneSeg">
+          <button data-t="dark" class="active">Dark text</button>
+          <button data-t="light">Light text</button>
+        </div>
+      </div>
+
+      <h2 class="section-h">4 &mdash; Download</h2>
+      <button class="btn dl-btn" id="downloadBtn" type="button">Download Card (1080 &times; 1920)</button>
+      <p class="hint">Your card downloads as a JPG, ready to post anywhere.</p>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Clipp Kaili Daily. All rights reserved.</p>
+    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="contact.html">Contact</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var W=1080,H=1920;
+var canvas=document.getElementById('card'),ctx=canvas.getContext('2d');
+
+/* ---------- 10 styles ---------- */
+var STYLES=[
+ {id:'floral',name:'Floral',sw:'linear-gradient(135deg,#f6e8f0,#e8eefb)',bg:'image',img:'images/card-bg-floral.webp',
+  heading:'#1c2652',titleA:'#6c3094',titleB:'#1c2652',body:'#344060',closeA:'#1c2652',closeB:'#6c3094',
+  accent:'#c6a8d4',heart:'#965ab4',pink:'#e85a9b',frame:'#c6a8d4',silhouette:true},
+ {id:'blackgold',name:'Black & Gold',sw:'linear-gradient(135deg,#0b0b0d,#2a2113)',
+  bg:'gradient',g:['#0b0b0d','#241d10'],
+  heading:'#c9a961',titleA:'#c9a961',titleB:'#f4f1ea',body:'#e8e2d4',closeA:'#f4f1ea',closeB:'#c9a961',
+  accent:'#8a6f3e',heart:'#c9a961',pink:'#c9a961',frame:'#8a6f3e'},
+ {id:'blush',name:'Soft Blush',sw:'linear-gradient(135deg,#fde8ef,#f9d3e0)',
+  bg:'gradient',g:['#fdf0f4','#f7cddb'],
+  heading:'#8e2f4a',titleA:'#b83a5e',titleB:'#8e2f4a',body:'#6e3a48',closeA:'#8e2f4a',closeB:'#b83a5e',
+  accent:'#d89aab',heart:'#c05a7a',pink:'#c05a7a',frame:'#d89aab'},
+ {id:'navy',name:'Navy Stars',sw:'linear-gradient(135deg,#101c3a,#1c2c5e)',
+  bg:'gradient',g:['#0d1830','#1e2f63'],stars:true,
+  heading:'#f4f1ea',titleA:'#e6d3a3',titleB:'#f4f1ea',body:'#d9e2f2',closeA:'#f4f1ea',closeB:'#e6d3a3',
+  accent:'#5a6f9e',heart:'#e6d3a3',pink:'#e6d3a3',frame:'#5a6f9e'},
+ {id:'sunset',name:'Sunset Glow',sw:'linear-gradient(135deg,#ff9a5a,#ff5e8a)',
+  bg:'gradient',g:['#ff8a4d','#e0447c'],
+  heading:'#ffffff',titleA:'#fff3d6',titleB:'#ffffff',body:'#fff8ee',closeA:'#ffffff',closeB:'#fff3d6',
+  accent:'rgba(255,255,255,.65)',heart:'#ffffff',pink:'#ffffff',frame:'rgba(255,255,255,.65)'},
+ {id:'minimal',name:'Minimal White',sw:'linear-gradient(135deg,#ffffff,#f1efe9)',
+  bg:'gradient',g:['#ffffff','#f2f0ea'],
+  heading:'#2b2b2e',titleA:'#6b6b70',titleB:'#2b2b2e',body:'#4a4a4e',closeA:'#2b2b2e',closeB:'#6b6b70',
+  accent:'#cfcfd4',heart:'#9a9aa0',pink:'#9a9aa0',frame:'#cfcfd4'},
+ {id:'vintage',name:'Vintage Rose',sw:'linear-gradient(135deg,#f3e6cf,#e3cda4)',
+  bg:'gradient',g:['#f4e8d2','#e2cba0'],
+  heading:'#6e2f2a',titleA:'#8e3b32',titleB:'#6e2f2a',body:'#5d4438',closeA:'#6e2f2a',closeB:'#8e3b32',
+  accent:'#b99a6e',heart:'#a05a4a',pink:'#a05a4a',frame:'#b99a6e'},
+ {id:'lavender',name:'Lavender Dream',sw:'linear-gradient(135deg,#d9c6f2,#a988e0)',
+  bg:'gradient',g:['#dcc8f5','#a37fe0'],
+  heading:'#3d2a5e',titleA:'#5b2d8e',titleB:'#3d2a5e',body:'#4e3d6e',closeA:'#3d2a5e',closeB:'#5b2d8e',
+  accent:'rgba(255,255,255,.7)',heart:'#ffffff',pink:'#ffffff',frame:'rgba(255,255,255,.7)'},
+ {id:'ocean',name:'Ocean Calm',sw:'linear-gradient(135deg,#a8e0e0,#5aa8c8)',
+  bg:'gradient',g:['#b5e3e3','#4f9ec4'],
+  heading:'#0f3a52',titleA:'#14707a',titleB:'#0f3a52',body:'#1e4a5e',closeA:'#0f3a52',closeB:'#14707a',
+  accent:'rgba(255,255,255,.65)',heart:'#ffffff',pink:'#ffffff',frame:'rgba(255,255,255,.65)'},
+ {id:'golden',name:'Golden Hour',sw:'linear-gradient(135deg,#ffe3a3,#f0b45a)',
+  bg:'gradient',g:['#ffe6ad','#efa94f'],
+  heading:'#6e4416',titleA:'#8e5a1a',titleB:'#6e4416',body:'#5d4a26',closeA:'#6e4416',closeB:'#8e5a1a',
+  accent:'rgba(255,255,255,.7)',heart:'#ffffff',pink:'#ffffff',frame:'rgba(255,255,255,.7)'}
+];
+var cur=STYLES[0],fontStyle='script',customImg=null,customTone='dark',wm=true;
+
+/* gallery */
+var gal=document.getElementById('styleGallery');
+STYLES.forEach(function(s,i){
+  var b=document.createElement('button');
+  b.className='style-btn'+(i===0?' active':'');b.type='button';
+  b.innerHTML='<div class="style-sw" style="background:'+s.sw+'"></div><div class="style-name">'+s.name+'</div>';
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.style-btn').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');cur=s;customImg=null;
+    document.getElementById('customToneField').style.display='none';
+    document.getElementById('bgUpload').value='';
+    render();
+  });
+  gal.appendChild(b);
+});
+
+/* controls */
+function on(id,ev,fn){document.getElementById(id).addEventListener(ev,fn)}
+['inHeading','inTitleA','inTitleB','inBody','inCloseA','inCloseB','inCloseC'].forEach(function(id){on(id,'input',render)});
+document.querySelectorAll('#fontSeg button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('#fontSeg button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');fontStyle=b.getAttribute('data-f');render();
+  });
+});
+on('inWatermark','change',function(){wm=this.checked;render()});
+on('bgUpload','change',function(){
+  var f=this.files[0];if(!f)return;
+  var img=new Image();
+  img.onload=function(){customImg=img;document.getElementById('customToneField').style.display='block';render();URL.revokeObjectURL(img.src)};
+  img.src=URL.createObjectURL(f);
+});
+document.querySelectorAll('#toneSeg button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('#toneSeg button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');customTone=b.getAttribute('data-t');render();
+  });
+});
+on('downloadBtn','click',function(){
+  render();
+  var a=document.createElement('a');
+  a.download='clipp-kaili-card-1080x1920.jpg';
+  a.href=canvas.toDataURL('image/jpeg',0.92);
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+});
+
+/* ---------- drawing ---------- */
+var floralImg=new Image(),floralReady=false;
+floralImg.onload=function(){floralReady=true;render()};
+floralImg.src='images/card-bg-floral.webp';
+
+function drawHeart(cx,cy,r,fill){
+  ctx.fillStyle=fill;ctx.beginPath();
+  ctx.ellipse(cx-r,cy-r*0.7,r,r*0.7,0,0,Math.PI*2);
+  ctx.ellipse(cx+r,cy-r*0.7,r,r*0.7,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.moveTo(cx-r,cy+r*0.25);ctx.lineTo(cx+r,cy+r*0.25);ctx.lineTo(cx,cy+r*1.28);ctx.closePath();ctx.fill();
+}
+function bt(t,x,y,p){
+  var o=p<=1?[[0,0]]:p===2?[[0,0],[1,0],[0,1]]:[[0,0],[1,0],[0,1],[1,1],[2,0],[0,2]];
+  for(var i=0;i<o.length;i++)ctx.fillText(t,x+o[i][0],y+o[i][1]);
+}
+function divider(cy,accent,heart){
+  var lw=W*0.15,gap=W*0.040;
+  ctx.strokeStyle=accent;ctx.lineWidth=3;ctx.beginPath();
+  ctx.moveTo(W/2-lw-gap,cy);ctx.lineTo(W/2-gap,cy);
+  ctx.moveTo(W/2+gap,cy);ctx.lineTo(W/2+lw+gap,cy);ctx.stroke();
+  ctx.fillStyle=accent;
+  [-1,1].forEach(function(s){[0.060,0.085,0.110].forEach(function(off){
+    var lx=W/2+s*W*off;ctx.beginPath();ctx.arc(lx,cy,6,0,Math.PI*2);ctx.fill();});});
+  drawHeart(W/2,cy,W*0.017,heart);
+}
+function titleFont(px){
+  if(fontStyle==='script')return px+'px "Great Vibes", cursive';
+  if(fontStyle==='serif')return '700 '+px+'px "Noto Serif", Georgia, serif';
+  return '700 '+px+'px "Noto Sans", Arial, sans-serif';
+}
+function wrap(text,maxW){
+  var words=text.split(/\s+/),lines=[],cur='';
+  for(var i=0;i<words.length;i++){var t=(cur+' '+words[i]).trim();
+    if(ctx.measureText(t).width<=maxW)cur=t;else{if(cur)lines.push(cur);cur=words[i];}}
+  if(cur)lines.push(cur);return lines;
+}
+function coverDraw(img){
+  var ir=img.width/img.height,cr=W/H,sw,sh,sx,sy;
+  if(ir>cr){sh=img.height;sw=img.height*cr;sx=(img.width-sw)/2;sy=0}
+  else{sw=img.width;sh=img.width/cr;sx=0;sy=(img.height-sh)/2}
+  ctx.drawImage(img,sx,sy,sw,sh,0,0,W,H);
+}
+function stars(){
+  ctx.fillStyle='rgba(255,255,255,.85)';
+  var pts=[[0.12,0.08],[0.3,0.15],[0.55,0.06],[0.78,0.12],[0.9,0.07],[0.2,0.25],[0.65,0.22],[0.85,0.28],[0.4,0.3],[0.08,0.35]];
+  pts.forEach(function(p){var r=2+Math.random()*2.5;ctx.beginPath();ctx.arc(p[0]*W,p[1]*H,r,0,Math.PI*2);ctx.fill();});
+}
+
+var fontsReady=false;
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){fontsReady=true;render()});}
+
+function render(){
+  var v=function(id){return document.getElementById(id).value};
+  var S=cur,C;
+  if(customImg){ /* readable scheme over user photo */
+    if(customTone==='dark'){C={heading:'#1c2652',titleA:'#6c3094',titleB:'#1c2652',body:'#2a3350',closeA:'#1c2652',closeB:'#6c3094',accent:'rgba(255,255,255,.85)',heart:'#965ab4',pink:'#e85a9b',frame:'rgba(255,255,255,.85)'}}
+    else{C={heading:'#ffffff',titleA:'#ffe9a8',titleB:'#ffffff',body:'#ffffff',closeA:'#ffffff',closeB:'#ffe9a8',accent:'rgba(255,255,255,.8)',heart:'#ffffff',pink:'#ffd7e8',frame:'rgba(255,255,255,.8)'}}
+  }else{C=S}
+  ctx.textBaseline='top';
+
+  /* background */
+  if(customImg){coverDraw(customImg);ctx.fillStyle='rgba(0,0,0,.18)';ctx.fillRect(0,0,W,H)}
+  else if(S.bg==='image'){
+    if(floralReady)coverDraw(floralImg);
+    else{ctx.fillStyle='#f7f1e8';ctx.fillRect(0,0,W,H)}
+  }else{
+    var gr=ctx.createLinearGradient(0,0,W,H);
+    gr.addColorStop(0,S.g[0]);gr.addColorStop(1,S.g[1]);
+    ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
+    if(S.stars)stars();
+  }
+
+  var y=H*0.060;
+  divider(y,C.accent,C.heart);y+=H*0.025;
+
+  var hPx=W*0.090;
+  ctx.font='700 '+hPx+'px "Noto Serif", Georgia, serif';
+  ctx.fillStyle=C.heading;ctx.textAlign='center';
+  bt(v('inHeading'),W/2,y,3);y+=hPx*1.18+H*0.005;
+
+  var tFull=v('inTitleA')+' '+v('inTitleB'),tPx=W*0.165;
+  while(tPx>20){ctx.font=titleFont(tPx);if(ctx.measureText(tFull).width<=W*0.80)break;tPx-=6}
+  ctx.font=titleFont(tPx);
+  var parts=[[v('inTitleA'),C.titleA],[' ',C.titleB],[v('inTitleB'),C.titleB]];
+  var widths=parts.map(function(p){return ctx.measureText(p[0]).width});
+  var x=(W-widths.reduce(function(a,b){return a+b},0))/2;
+  ctx.textAlign='left';
+  parts.forEach(function(p,i){ctx.fillStyle=p[1];bt(p[0],x,y,2);x+=widths[i]});
+  y+=tPx*1.30+H*0.018;
+
+  divider(y,C.accent,C.heart);y+=H*0.025;
+
+  var bPx=W*0.038;
+  ctx.font=bPx+'px "Noto Serif", Georgia, serif';
+  var lines=wrap(v('inBody'),W*0.80),lh=bPx*1.52;
+  var fx0=W*0.075,fx1=W*0.925,fy0=y-H*0.010,fy1=y+lh*lines.length+H*0.010;
+  ctx.strokeStyle=C.frame;
+  ctx.lineWidth=2;ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(fx0,fy0,fx1-fx0,fy1-fy0,W*0.025);else ctx.rect(fx0,fy0,fx1-fx0,fy1-fy0);
+  ctx.stroke();
+  ctx.lineWidth=1;ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(fx0+7,fy0+7,fx1-fx0-14,fy1-fy0-14,W*0.02);else ctx.rect(fx0+7,fy0+7,fx1-fx0-14,fy1-fy0-14);
+  ctx.stroke();
+  ctx.fillStyle=C.body;ctx.textAlign='center';
+  lines.forEach(function(ln,i){bt(ln,W/2,y+i*lh,1)});
+  y=fy1+H*0.018;
+
+  divider(y,C.accent,C.heart);y+=H*0.022;
+
+  var cPx=W*0.066,cA=v('inCloseA'),cB=v('inCloseB');
+  while(cPx>16){ctx.font=cPx+'px "Great Vibes", cursive';if(ctx.measureText(cA+cB).width<=W*0.88)break;cPx-=4}
+  ctx.font=cPx+'px "Great Vibes", cursive';
+  var wA=ctx.measureText(cA).width,wB=ctx.measureText(cB).width,cx=(W-wA-wB)/2;
+  ctx.textAlign='left';ctx.fillStyle=C.closeA;bt(cA,cx,y,2);cx+=wA;
+  ctx.fillStyle=C.closeB;bt(cB,cx,y,2);
+  y+=cPx*1.25+H*0.008;
+
+  var cC=v('inCloseC'),c2Px=cPx;
+  while(c2Px>16){ctx.font=c2Px+'px "Great Vibes", cursive';if(ctx.measureText(cC).width<=W*0.78)break;c2Px-=4}
+  ctx.font=c2Px+'px "Great Vibes", cursive';
+  var wC=ctx.measureText(cC).width,x2=(W-wC)/2;
+  ctx.fillStyle=C.closeA;bt(cC,x2,y,2);
+  drawHeart(x2+wC+W*0.030,y+c2Px*0.55,W*0.016,C.heart);
+  y+=c2Px*1.25+H*0.016;
+
+  drawHeart(W/2-W*0.28,y,W*0.015,C.pink);
+  drawHeart(W/2+W*0.28,y,W*0.015,C.pink);
+  if(!S.silhouette)drawHeart(W/2,y+H*0.028,W*0.020,C.heart);
+
+  if(wm){
+    ctx.font='700 '+Math.round(W*0.022)+'px "Noto Sans", Arial, sans-serif';
+    ctx.fillStyle=C.accent;ctx.textAlign='center';
+    ctx.fillText('M A D E   W I T H   C L I P P   K A I L I',W/2,H*0.965);
+  }
+}
+render();
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2026 Clipp Kaili Daily. All rights reserved.</p>
+    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="contact.html">Contact</a></p>
+  </div>
+</footer>
+</body>
+</html>
