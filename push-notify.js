@@ -5,8 +5,8 @@
 (function () {
   "use strict";
 
-  // TODO: Replace with your OneSignal App ID from onesignal.com
-  var ONESIGNAL_APP_ID = "YOUR_ONESIGNAL_APP_ID_HERE";
+  // OneSignal App ID — Clipp Kaili Daily (configured 2026-10-07)
+  var ONESIGNAL_APP_ID = "dd7912bd-f526-4f8c-b938-125a0e77206d";
 
   var PROMPT_DELAY_MS = 20000; // 20 seconds
   var DISMISS_DAYS = 7; // don't re-show for 7 days after "Maybe Later"
