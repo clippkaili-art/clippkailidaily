@@ -68,4 +68,35 @@
     }
     copyFallback();
   };
+  /* WhatsApp share: opens wa.me with prefilled text */
+  window.ckWhatsApp = function(opts){
+    opts = opts || {};
+    var text = (opts.text || '') + (opts.url ? '\n' + opts.url : '');
+    var url = 'https://wa.me/?text=' + encodeURIComponent(text);
+    window.open(url, '_blank', 'noopener');
+  };
+
+  /* Auto-inject WhatsApp button next to every [data-share-story] button */
+  function injectWhatsApp(){
+    document.querySelectorAll('[data-share-story]').forEach(function(btn){
+      if(btn.nextElementSibling && btn.nextElementSibling.hasAttribute('data-wa-share')) return;
+      var wa = document.createElement('button');
+      wa.className = 'share-btn';
+      wa.type = 'button';
+      wa.setAttribute('data-wa-share', '');
+      wa.style.background = '#25D366'; wa.style.borderColor = '#25D366'; wa.style.color = '#fff';
+      wa.textContent = 'Share on WhatsApp';
+      wa.addEventListener('click', function(){
+        var title = '', h1 = document.querySelector('.reader h1');
+        if(h1) title = h1.textContent.trim();
+        ckWhatsApp({text: (title ? title + ' — via Clipp Kaili Daily' : 'Clipp Kaili Daily'), url: window.location.href});
+      });
+      btn.parentNode.insertBefore(wa, btn.nextSibling);
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', injectWhatsApp);
+  }else{
+    injectWhatsApp();
+  }
 })();
