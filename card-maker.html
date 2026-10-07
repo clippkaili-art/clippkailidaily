@@ -634,6 +634,29 @@
         <div class="canvas-frame"><canvas id="cardCanvas" width="1080" height="1920" aria-label="Preview of your personalized quote card"></canvas></div>
       </aside>
     </section>
+    <section class="ck-email-signup" aria-label="Email signup" style="max-width:640px;margin:48px auto 24px;padding:36px 28px;text-align:center;background:#141414;border:1px solid #c9a961;border-radius:16px;">
+      <h2 style="color:#c9a961;font-size:26px;margin:0 0 10px;letter-spacing:.5px;">Get New Card Designs Every Week</h2>
+      <p style="color:#e8e2d4;font-size:16px;line-height:1.6;margin:0 0 20px;">Beautiful new quote card designs in your inbox, every week. Free forever.</p>
+      <!-- TODO: Connect Beehiiv — replace the form below with your Beehiiv embed code -->
+      <form id="ckEmailForm" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;" onsubmit="return false;">
+        <input type="email" id="ckEmailInput" placeholder="Your email address" required aria-label="Email address" style="flex:1;min-width:220px;padding:13px 16px;font-size:16px;border:1.5px solid #c9a961;border-radius:999px;background:#000;color:#f4f1ea;outline:none;">
+        <button type="submit" style="padding:13px 32px;font-size:16px;font-weight:700;border:none;border-radius:999px;background:#c9a961;color:#111;cursor:pointer;">Subscribe</button>
+      </form>
+      <p id="ckEmailSuccess" style="display:none;color:#c9a961;font-size:17px;font-weight:700;margin:16px 0 0;">You&rsquo;re in! Check your inbox. 💛</p>
+    </section>
+    <script>
+    (function(){
+      var f = document.getElementById('ckEmailForm');
+      if(f) f.addEventListener('submit', function(){
+        var em = document.getElementById('ckEmailInput').value.trim();
+        if(em && em.indexOf('@') > 0){
+          f.style.display = 'none';
+          document.getElementById('ckEmailSuccess').style.display = 'block';
+        }
+      });
+    })();
+    </script>
+
   </main>
 
   <footer class="site-footer">
