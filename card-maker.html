@@ -216,11 +216,42 @@ document.querySelectorAll('#toneSeg button').forEach(function(b){
 });
 on('downloadBtn','click',function(){
   render();
-  var a=document.createElement('a');
-  a.download='clipp-kaili-card-1080x1920.jpg';
-  a.href=canvas.toDataURL('image/jpeg',0.92);
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  var done=function(url,blob){
+    /* iPhone: native share sheet */
+    if(navigator.share&&blob){
+      try{
+        var file=new File([blob],'clipp-kaili-card-1080x1920.jpg',{type:'image/jpeg'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          navigator.share({files:[file],title:'My Quote Card'}).catch(function(){});
+          return;
+        }
+      }catch(e){}
+    }
+    if(navigator.share&&navigator.canShare===undefined){
+      /* older iOS: open image for press-and-hold save */
+      showSaveImage(url);return;
+    }
+    var a=document.createElement('a');
+    a.download='clipp-kaili-card-1080x1920.jpg';a.href=url;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
+  if(canvas.toBlob){
+    canvas.toBlob(function(blob){
+      var url=URL.createObjectURL(blob);
+      done(url,blob);
+    },'image/jpeg',0.92);
+  }else{
+    done(canvas.toDataURL('image/jpeg',0.92),null);
+  }
 });
+function showSaveImage(url){
+  var ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px';
+  ov.innerHTML='<p style="color:#fff;margin-bottom:12px;font-size:16px">Press and hold the image, then tap &ldquo;Save to Photos&rdquo;</p><img src="'+url+'" style="max-width:100%;max-height:75vh;border-radius:10px"><button style="margin-top:14px;padding:12px 32px;font-size:16px;border-radius:999px;border:none;background:#c9a961;color:#111;font-weight:700">Close</button>';
+  ov.querySelector('button').addEventListener('click',function(){document.body.removeChild(ov)});
+  ov.addEventListener('click',function(e){if(e.target===ov)document.body.removeChild(ov)});
+  document.body.appendChild(ov);
+}
 
 /* ---------- drawing ---------- */
 var floralImg=new Image(),floralReady=false;
