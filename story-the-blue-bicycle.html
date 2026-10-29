@@ -39,7 +39,7 @@
       <a href="audio-prayers.html">Listen to Prayers</a>
       <a href="card-maker.html">Card Maker</a>
       <a href="about.html">About</a>
-      <a href="contact.html">Contact</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
+      <a href="contact.html">Contact</a><a href="search.html">Search</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
     </nav>
   </div>
 </header>
@@ -95,8 +95,10 @@
     <a class="btn" href="stories.html">More Stories</a>
     <a class="btn btn-ghost" href="quotes.html">Daily Quotes</a>
     <button class="share-btn" type="button" data-share-story>Share this story</button>
+    <button class="share-btn" type="button" data-save-story>♥ Save</button>
   </div>
   <nav class="story-nav"><a href="story-the-treehouse.html">&larr; The Treehouse 🌳</a><a href="story-the-toolbox.html">The Toolbox 🔧 &rarr;</a></nav>
+  <div class="center" style="margin-top:14px"><a class="btn btn-ghost" href="readers.html?story=The%20Blue%20Bicycle%20%F0%9F%9A%B2">This happened to me too →</a></div>
   <a class="back-link" href="stories.html">← Back to all stories</a>
 </article>
 </main>
@@ -104,7 +106,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <p>&copy; 2026 Clipp Kaili Daily. All rights reserved.</p>
-    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a></p>
+    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="saved.html">Saved</a> &middot; <a href="readers.html">Readers</a></p>
   </div>
 </footer>
 <script src="share.js"></script>
@@ -126,5 +128,6 @@ var themeBtn=document.getElementById('theme-toggle');
 function setTheme(t){if(t==='light'){document.body.classList.add('light');if(themeBtn){themeBtn.textContent='\uD83C\uDF19 Night';}}else{document.body.classList.remove('light');if(themeBtn){themeBtn.textContent='\u2600\uFE0F Day';}}try{localStorage.setItem('ckTheme',t);}catch(e){}}
 if(themeBtn){themeBtn.addEventListener('click',function(){setTheme(document.body.classList.contains('light')?'dark':'light');});setTheme(document.body.classList.contains('light')?'light':'dark');}
 }catch(e){}})();</script>
+<script>(function(){try{var b=document.querySelector('[data-save-story]');if(!b){return;}var h=document.querySelector('h1');var title=h?h.textContent.trim():document.title;var url=location.pathname.split('/').pop();function load(){try{return JSON.parse(localStorage.getItem('ckSaved')||'[]');}catch(e){return [];}}function saved(){return load().some(function(s){return s.u===url;});}function paint(){b.textContent=saved()?'♥ Saved ✓':'♥ Save';}b.addEventListener('click',function(){var a=load();if(saved()){a=a.filter(function(s){return s.u!==url;});}else{a.push({t:title,u:url});}try{localStorage.setItem('ckSaved',JSON.stringify(a));}catch(e){}paint();});paint();}catch(e){}})();</script>
 </body>
 </html>

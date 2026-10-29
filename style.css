@@ -113,3 +113,50 @@ body.light .share-btn{color:#8a6d2f;border-color:#8a6d2f}
 body.light .share-btn:hover{background:#8a6d2f;color:#fff}
 body.light .btn-ghost{color:#8a6d2f;border-color:#8a6d2f}
 body.light .story-nav a{color:#8a6d2f}
+
+/* growth batch: banner, story-of-day, mood, gratitude, search, quiz, saved, readers, listen, amen */
+.season-banner{background:var(--gold);color:#111;text-align:center;padding:12px 16px;font-weight:700;font-size:17px}
+.season-banner a{color:#111;text-decoration:underline;margin-left:10px}
+.sod-card{display:flex;gap:20px;max-width:860px;margin:6px auto 0;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sod-card img{width:280px;object-fit:cover}
+.sod-card .sod-body{padding:22px}
+.sod-label{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.sod-card h3{font-size:26px;color:var(--gold);margin:8px 0}
+.sod-card p{color:var(--muted);line-height:1.6}
+@media(max-width:640px){.sod-card{flex-direction:column}.sod-card img{width:100%;max-height:260px}}
+.mood-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0 20px}
+.mood-btn{border:1.5px solid var(--gold);background:transparent;color:var(--gold);border-radius:999px;padding:10px 22px;font-size:17px;cursor:pointer;font-family:inherit}
+.mood-btn:hover,.mood-btn.active{background:var(--gold);color:#111}
+#mood-result{display:none;max-width:640px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+#mood-result.show{display:block}
+#mood-result blockquote{font-family:Georgia,serif;font-size:21px;line-height:1.6;margin-bottom:14px}
+#mood-result a{color:var(--gold)}
+.gratitude-q{font-family:Georgia,serif;font-size:24px;text-align:center;max-width:640px;margin:0 auto 16px}
+.search-result{border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 auto 14px;max-width:700px;text-align:left;background:var(--card)}
+.search-result .rtype{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.search-result h3{margin:6px 0}
+.search-result p{color:var(--muted)}
+.quiz-q{max-width:640px;margin:0 auto 26px;text-align:left}
+.quiz-q h3{margin-bottom:12px}
+.quiz-opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:12px 16px;margin-bottom:10px;font-size:17px;cursor:pointer;font-family:inherit}
+.quiz-opt:hover{border-color:var(--gold)}
+#quiz-result{display:none;max-width:640px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+#quiz-result.show{display:block}
+.saved-item{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 auto 12px;max-width:700px;background:var(--card);display:flex;justify-content:space-between;gap:12px;align-items:center}
+.saved-item button{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:16px}
+.reader-form{max-width:640px;margin:0 auto;text-align:left}
+.reader-form label{display:block;margin:16px 0 6px;font-weight:700}
+.reader-form input,.reader-form textarea,.reader-form select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:17px;font-family:inherit}
+.listen-box{text-align:center;margin:0 auto 26px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:640px}
+.listen-box audio{width:100%;margin-top:10px}
+.amen-btn{background:transparent;color:var(--gold);border:1.5px solid var(--gold);border-radius:999px;padding:8px 22px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px}
+.amen-btn.prayed{background:var(--gold);color:#111}
+body.light .sod-card,body.light #mood-result,body.light .search-result,body.light #quiz-result,body.light .saved-item,body.light .listen-box{background:#fff;border-color:#e5dfd3}
+body.light .sod-card p,body.light .search-result p{color:#55504a}
+body.light .sod-label,body.light .search-result .rtype{color:#8a6d2f}
+body.light .mood-btn{color:#8a6d2f;border-color:#8a6d2f}
+body.light .mood-btn:hover,body.light .mood-btn.active{background:#8a6d2f;color:#fff}
+body.light .quiz-opt{background:#fff;border-color:#e5dfd3;color:#222}
+body.light .reader-form input,body.light .reader-form textarea,body.light .reader-form select{background:#fff;color:#222;border-color:#ddd}
+body.light .amen-btn{color:#8a6d2f;border-color:#8a6d2f}
+body.light .amen-btn.prayed{background:#8a6d2f;color:#fff}

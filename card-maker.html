@@ -536,7 +536,21 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
     }
-  </style>
+  
+/* letters & celebration cards */
+.letter-shell{max-width:640px;margin:48px auto 24px;padding:36px 28px;background:#141414;border:1px solid #c9a961;border-radius:16px}
+.letter-shell h2{text-align:center;color:#c9a961;margin-bottom:10px}
+.letter-shell p.lead{text-align:center;color:#ccc}
+.letter-tpls{text-align:center;margin:14px 0}
+.letter-tpl{background:transparent;color:#c9a961;border:1.5px solid #c9a961;border-radius:999px;padding:9px 18px;font-size:15px;cursor:pointer;margin:4px;font-family:inherit}
+.letter-tpl:hover{background:#c9a961;color:#111}
+.letter-field{display:block;margin:16px 0 6px;font-weight:700;color:#eee}
+.letter-input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #444;background:#1e1e1e;color:#eee;font-size:16px;font-family:inherit}
+.lbtn{background:#c9a961;color:#111;border:0;border-radius:999px;padding:13px 30px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit}
+.lbtn-ghost{background:transparent;color:#c9a961;border:1.5px solid #c9a961;border-radius:999px;padding:13px 26px;font-size:16px;cursor:pointer;font-family:inherit}
+.letter-canvas-wrap{text-align:center;margin-top:22px}
+#letter-canvas{width:100%;max-width:420px;height:auto;border-radius:12px}
+</style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5683691804295448" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -548,7 +562,7 @@
         <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true"><path d="M1 2h20M1 9h20M1 16h20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       </button>
       <nav class="site-nav" id="siteNav" aria-label="Main navigation">
-        <a href="index.html">Home</a><a href="quotes.html">Quotes</a><a href="stories.html">Stories</a><a href="audio-prayers.html">Listen to Prayers</a><a href="shop.html">Shop</a><a class="active" href="card-maker.html" aria-current="page">Card Maker</a><a href="about.html">About</a><a href="contact.html">Contact</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
+        <a href="index.html">Home</a><a href="quotes.html">Quotes</a><a href="stories.html">Stories</a><a href="audio-prayers.html">Listen to Prayers</a><a href="shop.html">Shop</a><a class="active" href="card-maker.html" aria-current="page">Card Maker</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="search.html">Search</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
       </nav>
     </div>
   </header>
@@ -642,7 +656,35 @@
         <div class="canvas-frame"><canvas id="cardCanvas" width="1080" height="1920" aria-label="Preview of your personalized quote card"></canvas></div>
       </aside>
     </section>
-    <section class="ck-email-signup" aria-label="Email signup" style="max-width:640px;margin:48px auto 24px;padding:36px 28px;text-align:center;background:#141414;border:1px solid #c9a961;border-radius:16px;">
+    <section class="letter-shell" aria-labelledby="letterTitle">
+  <h2 id="letterTitle">Letters &amp; Celebration Cards</h2>
+  <p class="lead">Write a letter, a birthday card, or an anniversary card — and download it as an image to send or print.</p>
+  <div class="letter-tpls">
+    <button class="letter-tpl" type="button" data-tpl="birthday">🎂 Birthday Card</button>
+    <button class="letter-tpl" type="button" data-tpl="anniversary">💛 Anniversary Card</button>
+    <button class="letter-tpl" type="button" data-tpl="letter">✉️ Just a Letter</button>
+  </div>
+  <form id="letter-form" onsubmit="return false">
+    <label class="letter-field" for="letter-to">To</label>
+    <select class="letter-input" id="letter-to"><option>Dad</option><option>Mom</option><option>Grandpa</option><option>Grandma</option><option>Son</option><option>Daughter</option><option>My Love</option></select>
+    <label class="letter-field" for="letter-occasion">Occasion</label>
+    <select class="letter-input" id="letter-occasion"><option value="">A letter, just because</option><option>Birthday</option><option>Thank you</option><option>I miss you</option><option>Anniversary</option></select>
+    <label class="letter-field" for="letter-body">Your message</label>
+    <textarea class="letter-input" id="letter-body" rows="6" maxlength="700">I was thinking about you today, and I wanted you to know how much you mean to me. Thank you for everything you have done for our family. I love you, always.</textarea>
+    <label class="letter-field" for="letter-from">From (your name)</label>
+    <input class="letter-input" id="letter-from" type="text" maxlength="40" placeholder="Your name">
+    <label class="letter-field" for="letter-date">Date (optional, for birthday &amp; anniversary cards)</label>
+    <input class="letter-input" id="letter-date" type="text" maxlength="30" placeholder="e.g. November 26, 2026">
+    <label class="letter-field" for="letter-photo">Photo (optional)</label>
+    <input class="letter-input" id="letter-photo" type="file" accept="image/png,image/jpeg,image/webp">
+    <div style="text-align:center;margin-top:18px"><button class="lbtn" type="button" id="letter-make">Make My Card</button></div>
+  </form>
+  <div class="letter-canvas-wrap"><canvas id="letter-canvas" width="1080" height="1350" aria-label="Preview of your letter card"></canvas></div>
+  <div style="text-align:center;margin-top:14px"><button class="lbtn" type="button" id="letter-download">Download Card</button> <button class="lbtn-ghost" type="button" id="letter-copy">Copy Letter Text</button></div>
+  <p style="text-align:center;color:#999;font-size:14px;margin-top:12px">Your photo stays on this device. Nothing is uploaded.</p>
+</section>
+<script>(function(){var cv=document.getElementById('letter-canvas');var ctx=cv.getContext('2d');var photo=null;var TPL={birthday:{o:'Birthday',b:'Happy Birthday! Today we celebrate you and all the love you bring to our family. Thank you for every sacrifice, every hug, and every lesson. We love you more than words can say.'},anniversary:{o:'Anniversary',b:'Happy Anniversary! Fifty years of love is the greatest story we know. Thank you for showing us what forever looks like.'},letter:{o:'',b:'I was thinking about you today, and I wanted you to know how much you mean to me. Thank you for everything you have done for our family. I love you, always.'}};function wrap(text,maxW,font){ctx.font=font;var words=text.split(/\s+/);var lines=[];var line='';words.forEach(function(w){var t=line?line+' '+w:w;if(ctx.measureText(t).width>maxW&&line){lines.push(line);line=w;}else{line=t;}});if(line){lines.push(line);}return lines;}function draw(){var to=document.getElementById('letter-to').value;var occ=document.getElementById('letter-occasion').value;var body=document.getElementById('letter-body').value;var from=document.getElementById('letter-from').value;var date=document.getElementById('letter-date').value;var head={Birthday:'Happy Birthday!',Anniversary:'Happy Anniversary!','Thank you':'Thank You','I miss you':'I Miss You'}[occ]||'';var fs=44;var lines=[];while(fs>=24){lines=wrap(body,900,fs+'px Georgia, serif');var h=lines.length*Math.round(fs*1.5);var avail=1350-240-(head?120:0)-(date?60:0)-(photo?480:0)-160;if(h<=avail||fs===24){break;}fs-=2;}var H=Math.max(1350,240+(head?120:0)+(date?60:0)+(photo?480:0)+lines.length*Math.round(fs*1.5)+200);cv.height=H;ctx.fillStyle='#fdf8ef';ctx.fillRect(0,0,1080,H);ctx.strokeStyle='#c9a961';ctx.lineWidth=6;ctx.strokeRect(24,24,1032,H-48);var y=110;if(head){ctx.fillStyle='#a8842c';ctx.font='700 72px Georgia, serif';ctx.textAlign='center';ctx.fillText(head,540,y);y+=90;}if(date){ctx.fillStyle='#8a7a5c';ctx.font='36px Georgia, serif';ctx.fillText(date,540,y);y+=60;}if(photo){var pw=960,ph=420;var px=60;var scale=Math.max(pw/photo.width,ph/photo.height);var sw=pw/scale,sh=ph/scale;var sx=(photo.width-sw)/2,sy=(photo.height-sh)/2;ctx.drawImage(photo,sx,sy,sw,sh,px,y,pw,ph);y+=ph+60;}ctx.fillStyle='#222';ctx.font='700 64px Georgia, serif';ctx.fillText('Dear '+to+',',540,y);y+=90;ctx.fillStyle='#333';ctx.font=fs+'px Georgia, serif';lines.forEach(function(l){ctx.fillText(l,540,y);y+=Math.round(fs*1.5);});y+=30;if(from){ctx.fillStyle='#222';ctx.font='italic 44px Georgia, serif';ctx.fillText('With love,',540,y);y+=66;ctx.fillText(from,540,y);y+=66;}ctx.fillStyle='#b9a06a';ctx.font='28px Georgia, serif';ctx.fillText('clippkailidaily.com',540,H-60);}document.querySelectorAll('.letter-tpl').forEach(function(b){b.addEventListener('click',function(){var t=TPL[b.getAttribute('data-tpl')];document.getElementById('letter-occasion').value=t.o;document.getElementById('letter-body').value=t.b;draw();});});document.getElementById('letter-make').addEventListener('click',draw);document.getElementById('letter-photo').addEventListener('change',function(e){var f=e.target.files[0];if(!f){photo=null;draw();return;}var r=new FileReader();r.onload=function(){var img=new Image();img.onload=function(){photo=img;draw();};img.src=r.result;};r.readAsDataURL(f);});document.getElementById('letter-download').addEventListener('click',function(){draw();var a=document.createElement('a');a.download='clipp-kaili-letter-card.png';a.href=cv.toDataURL('image/png');a.click();});document.getElementById('letter-copy').addEventListener('click',function(){var to=document.getElementById('letter-to').value;var body=document.getElementById('letter-body').value;var from=document.getElementById('letter-from').value;var t='Dear '+to+',\n\n'+body+(from?'\n\nWith love,\n'+from:'');if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('Letter copied! Paste it anywhere.');});}else{alert(t);}});draw();})();</script>
+<section class="ck-email-signup" aria-label="Email signup" style="max-width:640px;margin:48px auto 24px;padding:36px 28px;text-align:center;background:#141414;border:1px solid #c9a961;border-radius:16px;">
       <h2 style="color:#c9a961;font-size:26px;margin:0 0 10px;letter-spacing:.5px;">Get New Card Designs Every Week</h2>
       <p style="color:#e8e2d4;font-size:16px;line-height:1.6;margin:0 0 20px;">Beautiful new quote card designs in your inbox, every week. Free forever.</p>
       <a href="https://gentlemomnotes.beehiiv.com/subscribe" target="_blank" rel="noopener" style="display:inline-block;padding:14px 44px;font-size:17px;font-weight:700;text-decoration:none;border-radius:999px;background:#c9a961;color:#111;">Subscribe Free 💛</a>
@@ -653,7 +695,7 @@
   <footer class="site-footer">
   <div class="wrap">
     <p>&copy; 2026 Clipp Kaili Daily. All rights reserved.</p>
-    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a></p>
+    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="saved.html">Saved</a> &middot; <a href="readers.html">Readers</a></p>
   </div>
 </footer>
   <div class="toast" id="toast" role="status" aria-live="polite">Your card is ready.</div>

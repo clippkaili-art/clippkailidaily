@@ -34,17 +34,19 @@
       <a href="shop.html">Shop</a>
       <a href="card-maker.html">Card Maker</a>
       <a href="about.html">About</a>
-      <a href="contact.html">Contact</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
+      <a href="contact.html">Contact</a><a href="search.html">Search</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
     </nav>
   </div>
 </header>
 <!-- AdSense: header leaderboard — paste your ad unit code here after approval -->
 <main>
+<div class="season-banner">🍂 Thanksgiving is coming. Send a thank-you card to someone you love. <a href="card-maker.html">Make a Card →</a></div>
 <section class="hero">
   <h1>Clipp Kaili</h1>
   <p class="tagline">Heart-touching family stories &amp; quotes</p>
   <img class="hero-banner" src="images/home-share-banner.jpg" alt="A family reading together — Clipp Kaili Daily">
-  <div class="center" style="margin-top:16px"><a class="btn" href="story-the-last-piece-of-pie.html">❤️ Today's Featured Story</a></div>
+  <div class="sod-card" id="sod-card"><img id="sod-img" src="images/media-generation-batch01-story01-last-piece-of-0-c191c15b-9587-4b0d-b8a5-a0c1785415cd.webp" alt="The Last Piece of Pie"><div class="sod-body"><span class="sod-label">Today's Story</span><h3 id="sod-title">The Last Piece of Pie</h3><p id="sod-desc">Every Sunday for thirty-one years, my mother cut the apple pie into five pieces. There were only four of us at the table.</p><div style="margin-top:14px"><a class="btn" id="sod-link" href="story-the-last-piece-of-pie.html">Read Today's Story →</a></div></div></div>
+<script>(function(){var SOD=[{"t": "The Last Piece of Pie", "u": "story-the-last-piece-of-pie.html", "img": "images/media-generation-batch01-story01-last-piece-of-0-c191c15b-9587-4b0d-b8a5-a0c1785415cd.webp", "d": "Every Sunday for thirty-one years, my mother cut the apple pie into five pieces. There were only four of us at the table."}, {"t": "The Voicemail", "u": "story-the-voicemail.html", "img": "images/media-generation-batch01-story02-the-voicemail-0-aaae25bd-d0a9-4ded-ba35-9b44c1990af2.webp", "d": "There is one voicemail on my phone I will never delete. It is thirty-eight seconds long, and most of it is about a tire."}, {"t": "The Bus Stop Bench", "u": "story-the-bus-stop-bench.html", "img": "images/media-generation-batch01-story03-bus-stop-bench-0-6eb665e1-d34b-4bc8-b303-61b4894afa54.webp", "d": "The old man was at the bus stop every morning at seven, holding a small bunch of flowers, and he never got on the bus."}, {"t": "The Train Station 🚂", "u": "story-the-train-station.html", "img": "images/32-the-train-station.jpg", "d": "My father has driven to the train station every Friday for eleven years — to pick up someone who never arrives."}, {"t": "The Night Shift Nurse", "u": "story-the-night-shift-nurse.html", "img": "images/media-generation-batch01-story08-night-shift-nu-0-86c7f74f-960c-4015-b08c-e8407e87b901.webp", "d": "The nurse's shift ended at seven. The old man had no one coming, so she stayed until nine."}, {"t": "The Auction 🔨", "u": "story-the-auction.html", "img": "images/30-the-auction.jpg", "d": "My father auctioned off our childhood home on a Tuesday morning — and he didn't tell any of us until the bidding started."}, {"t": "The Watch ⌚", "u": "story-the-watch.html", "img": "images/daily-the-watch.jpg", "d": "My grandfather's watch stopped the day he died. It started ticking at my wedding. His name was Walter. He raised me from the time I was"}];function doy(){var n=new Date();var s=new Date(n.getFullYear(),0,0);return Math.floor((n-s)/864e5);}var s=SOD[doy()%SOD.length];var img=document.getElementById('sod-img');if(img){img.src=s.img;img.alt=s.t;}var t=document.getElementById('sod-title');if(t){t.textContent=s.t;}var d=document.getElementById('sod-desc');if(d){d.textContent=s.d;}var l=document.getElementById('sod-link');if(l){l.href=s.u;}})();</script>
 </section>
 <!-- AdSense: header leaderboard — paste your ad unit code here after approval -->
 <section class="qotd">
@@ -59,6 +61,23 @@
     <button class="btn" id="shuffle-btn" type="button">New Quote</button>
     <a class="btn btn-ghost" href="quotes.html">All Quotes</a>
   </div>
+</section>
+<section class="wrap center" style="margin-bottom:50px">
+  <h2 class="section-title">How Is Your Heart Today?</h2>
+  <div class="mood-btns"><button class="mood-btn" type="button" data-mood="Missing someone">Missing someone</button><button class="mood-btn" type="button" data-mood="Grateful">Grateful</button><button class="mood-btn" type="button" data-mood="Tired">Tired</button><button class="mood-btn" type="button" data-mood="Hopeful">Hopeful</button><button class="mood-btn" type="button" data-mood="Need a prayer">Need a prayer</button></div>
+  <div id="mood-result"><blockquote id="mood-quote"></blockquote><p><a id="mood-story" href="#">Read a story</a> &middot; <a href="audio-prayers.html" id="mood-prayer">Listen to a prayer</a></p></div>
+</section>
+<script>(function(){var MOODS={"Missing someone": {"q": "Call your mother today. One day you'll wish you could. 📞", "s": ["The Train Station 🚂", "story-the-train-station.html"], "p": "A Prayer for My Family"}, "Grateful": {"q": "Your parents' hands built the life you stand on. Hold those hands while you can. 🤝", "s": ["Pancake Sundays 🥞", "story-pancake-sundays.html"], "p": "To My Precious Children"}, "Tired": {"q": "The porch light your parents leave on isn't about safety. It's about love that refuses to sleep. 💡", "s": ["The Porch Swing", "story-the-porch-swing.html"], "p": "A Prayer for My Grandchildren"}, "Hopeful": {"q": "The best gift a parent can give is roots deep enough to hold and wings wide enough to fly. 🕊", "s": ["The Night Shift Nurse", "story-the-night-shift-nurse.html"], "p": "A Prayer for Children's Future"}, "Need a prayer": {"q": "A mother's prayer follows her child into rooms she will never enter. 🙏", "s": ["The Voicemail I Will Never Delete", "story-the-voicemail.html"], "p": "A Prayer for My Son's Success"}};document.querySelectorAll('.mood-btn').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.mood-btn').forEach(function(x){x.classList.remove('active');});b.classList.add('active');var m=MOODS[b.getAttribute('data-mood')];document.getElementById('mood-quote').textContent=m.q;var s=document.getElementById('mood-story');s.textContent='Read: '+m.s[0];s.href=m.s[1];document.getElementById('mood-prayer').textContent='Listen: '+m.p;document.getElementById('mood-result').classList.add('show');});});})();</script>
+<section class="wrap center" style="margin-bottom:50px">
+  <h2 class="section-title">Today's Gratitude Question</h2>
+  <p class="gratitude-q" id="gratitude-q">Who held you up in a hard time?</p>
+  <div class="center" style="margin-top:14px"><a class="btn" href="card-maker.html">Send Them a Thank-You Card →</a></div>
+</section>
+<script>(function(){var Q=["Who held you up in a hard time?","Which memory always makes you smile?","Who did something for you without being asked?","What lesson did your family teach you?","Who should you talk to today?","Which moment do you never want to forget?","What are you thankful for today?"];var el=document.getElementById('gratitude-q');if(el){el.textContent=Q[new Date().getDay()];}})();</script>
+<section class="wrap center" style="margin-bottom:50px">
+  <h2 class="section-title">Which Family Story Are You?</h2>
+  <p style="color:var(--muted)">Answer 5 quick questions and discover your family-story heart.</p>
+  <div class="center" style="margin-top:14px"><a class="btn" href="quiz.html">Take the Quiz →</a></div>
 </section>
 <section class="wrap">
   <h2 class="section-title">Latest Stories</h2>
@@ -156,7 +175,7 @@ document.getElementById('share-qotd').addEventListener('click', () => {
 <footer class="site-footer">
   <div class="wrap">
     <p>&copy; 2026 Clipp Kaili Daily. All rights reserved.</p>
-    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a></p>
+    <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="disclaimer.html">Disclaimer</a> &middot; <a href="contact.html">Contact</a> &middot; <a href="saved.html">Saved</a> &middot; <a href="readers.html">Readers</a></p>
   </div>
 </footer>
 <div id="cookie-banner" role="region" aria-label="Cookie notice">We use cookies to understand visits and keep the site running smoothly. <button id="cookie-ok" type="button">OK</button></div>
