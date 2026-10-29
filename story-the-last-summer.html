@@ -25,6 +25,7 @@
 {"@context": "https://schema.org", "@type": "Article", "headline": "The Last Summer ☀️", "description": "We sold the lake cabin. Then the new owners called about the walls.", "image": "https://clippkailidaily.com/images/daily-the-last-summer.jpg", "url": "https://clippkailidaily.com/story-the-last-summer.html", "author": {"@type": "Organization", "name": "Clipp Kaili Daily"}, "publisher": {"@type": "Organization", "name": "Clipp Kaili Daily"}}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5683691804295448" crossorigin="anonymous"></script>
 </head>
 <body>
+<script>(function(){try{var t=localStorage.getItem('ckTheme');if(t==='light'){document.body.classList.add('light');}}catch(e){}})();</script>
 <header class="site-header">
   <div class="wrap nav-row">
     <a class="brand" href="index.html">Clipp&nbsp;Kaili</a>
@@ -35,7 +36,7 @@
       <a href="audio-prayers.html">Listen to Prayers</a>
       <a href="card-maker.html">Card Maker</a>
       <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html">Contact</a><button class="a11y-btn" id="theme-toggle" type="button" title="Switch day / night mode">☀️ Day</button>
     </nav>
   </div>
 </header>
@@ -115,5 +116,10 @@
 </script>
 <div id="cookie-banner" role="region" aria-label="Cookie notice">We use cookies to understand visits and keep the site running smoothly. <button id="cookie-ok" type="button">OK</button></div>
 <script>(function(){try{if(!localStorage.getItem('ckCookieOK')){var b=document.getElementById('cookie-banner');if(b){b.style.display='block';document.getElementById('cookie-ok').addEventListener('click',function(){localStorage.setItem('ckCookieOK','1');b.style.display='none';});}}}catch(e){}})();</script>
+<script>(function(){try{
+var themeBtn=document.getElementById('theme-toggle');
+function setTheme(t){if(t==='light'){document.body.classList.add('light');if(themeBtn){themeBtn.textContent='\uD83C\uDF19 Night';}}else{document.body.classList.remove('light');if(themeBtn){themeBtn.textContent='\u2600\uFE0F Day';}}try{localStorage.setItem('ckTheme',t);}catch(e){}}
+if(themeBtn){themeBtn.addEventListener('click',function(){setTheme(document.body.classList.contains('light')?'dark':'light');});setTheme(document.body.classList.contains('light')?'light':'dark');}
+}catch(e){}})();</script>
 </body>
 </html>
